@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\customer_Product_Back-end.props" />
+</Project>
