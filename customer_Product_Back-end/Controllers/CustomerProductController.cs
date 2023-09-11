@@ -36,6 +36,23 @@ namespace customer_Product_Back_end.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("ShowTable")]
+        public IActionResult ShowTable()
+        {
+            DataSet ds = new DataSet();
+            ProductCustomerDataLayer dl = new ProductCustomerDataLayer();
+            try
+            {
+                ds = dl.ShowTable(_conn);
+
+                return Ok(JsonConvert.SerializeObject(ds.Tables[0]));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
         [HttpPost]
         [Route("SaveProduct")]
         public IActionResult SaveProductCustmer([FromBody] ProductCustomer ProductCustomer)

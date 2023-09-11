@@ -76,6 +76,24 @@ namespace customer_Product_Back_end.DataLyers
                 throw;
             }
         }
+        public DataSet ShowTable(string connectionName)
+        {
+            try
+            {
+                int index = 0;
+                SqlParameter[] parameter = new SqlParameter[1];
+                parameter[index] = new SqlParameter("@OutMessage", SqlDbType.VarChar, 500);
+                parameter[index].Direction = ParameterDirection.Output;
+                parameter[index].Value = "";
+
+                ds = ProductCustmerDl.GetData("ShowTable", ref parameter, connectionName);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public string SaveSaleDate(string connectionName, int CustomerId, string SaleDate)
         {
             try
@@ -100,5 +118,6 @@ namespace customer_Product_Back_end.DataLyers
                 throw;
             }
         }
+
     }
 }

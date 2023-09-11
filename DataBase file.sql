@@ -39,11 +39,13 @@ BEGIN
 	SELECT ProductId = @ProductId,
 	ProductName = @ProductName,
 	Price = @Price,
-	CustomerId = @CustomerId;
+	CustomerId = @CustomerId,
+	SaleDate = '';
 	SET @OutMessage = 'Sucessfull';
 	SELECT @OutMessage ;
 END
 
+exec  GetProductCustomer '', 1
 
 create or alter procedure GetProductCustomer
 (
@@ -71,5 +73,18 @@ BEGIN
 	UPDATE Product SET SaleDate = @SaleDate 
 	WHERE CustomerId = @CustomerId;
 	SET @OutMessage = 'Sucessfull';
+	SELECT @OutMessage ;
+END
+
+
+create or alter procedure ShowTable
+(
+	@OutMessage varchar(250) OUTPUT
+)
+AS
+BEGIN
+	SELECT CustomerName, ProductName, Price, SaleDate 
+	FROM CustomerData CD 
+	INNER JOIN Product P ON CD.CustomerId = P.CustomerId;
 	SELECT @OutMessage ;
 END
